@@ -8,6 +8,35 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- 🔐 Password Gate -->
+     <div id="passwordGate" class="password-gate">
+        <div class="gate-content">
+        <div class="lock-icon">🔐</div>
+        <p class="gate-subtitle">Sebuah surat telah menunggu</p>
+        <h1 class="gate-title">Masukkan Sandi<br>Untuk Membuka</h1>
+
+        <div class="gate-form">
+            <input 
+                type="password" 
+                id="passwordInput" 
+                placeholder="Tulis di sini..." 
+                autocomplete="off"
+                maxlength="20">
+            <button onclick="checkPassword()">Buka 💌</button>
+        </div>
+
+        <p id="gateError" class="gate-error"></p>
+
+        <div class="gate-hint">
+            <p class="hint-label">✨ Petunjuk</p>
+            <p class="hint-text">
+                Nama yang selalu kusebut<br>
+                saat sang pemilik nama melakukan
+                hal yang menyebalkan—<br>
+            </p>
+        </div>
+    </div>
+</div>
 
     <!-- 🎵 Kontrol Musik Background -->
     <div class="music-player">
