@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2 Bulan Bersamamu 💕</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- 🎵 Kontrol Musik Background -->
+    <div class="music-player">
+        <button id="musicBtn" onclick="toggleMusic()">▶</button>
+        <span class="music-label">Play our song</span>
+    </div>
+    <audio id="bgMusic" loop>
+        <source src="assets/lagu.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- ✨ Hero Section -->
+    <section class="hero">
+        <div class="stars"></div>
+        <div class="hero-content">
+            <p class="subtitle">Happy 2nd Mensiversarry</p>
+            <h1 class="title">Untukmu,<br>Selamanya</h1>
+            <p class="date">02 · 02 · 2026</p>
+            <a href="#letter" class="scroll-btn">Buka Surat 💌</a>
+        </div>
+    </section>
+
+    <!-- 💌 Love Letter -->
+    <section id="letter" class="letter-section">
+        <h2>Love Letter</h2>
+        <div class="letter-card">
+            <p>
+                Sayang,<br><br>
+                Dua bulan mungkin terasa singkat bagi orang lain, tapi bagiku setiap harinya bersamamu
+                adalah bab baru yang paling indah. Terima kasih sudah hadir, tertawa, dan bertahan
+                di setiap cerita kita.<br><br>
+                Aku suka caramu menyebut namaku, caramu marah kecil, dan caramu menggenggam tanganku
+                saat aku takut. Semoga kita terus tumbuh bersama, ya. 🌙<br><br>
+                <em>— Selamanya milikmu</em>
+            </p>
+        </div>
+    </section>
+
+    <!-- 🎧 Spotify Playlist -->
+    <section class="playlist-section">
+        <h2>Our Playlist 🎧</h2>
+        <p class="desc">Lagu-lagu yang mengingatkanku padamu</p>
+        <iframe style="border-radius:12px" 
+            src="https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0" 
+            width="100%" height="380" frameBorder="0" allowfullscreen="" 
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy">
+        </iframe>
+        <p class="hint">*Ganti link Spotify dengan playlist kalian berdua</p>
+    </section>
+
+    <!-- 📸 Galeri Editan -->
+    <section class="gallery-section">
+        <h2>Our Edits 📸</h2>
+        <div class="gallery">
+            <div class="polaroid"><img src="assets/foto1.jpg" alt="kenangan 1"><span>hari pertama</span></div>
+            <div class="polaroid"><img src="assets/foto2.jpg" alt="kenangan 2"><span>kita & senja</span></div>
+            <div class="polaroid"><img src="https://picsum.photos/300/400?random=3" alt="kenangan 3"><span>tertawa bersama</span></div>
+            <div class="polaroid"><img src="https://picsum.photos/300/400?random=4" alt="kenangan 4"><span>dream date</span></div>
+        </div>
+    </section>
+
+    <!-- ✍️ Tulisan Medium -->
+    <section class="medium-section">
+        <h2>My Thoughts ✍️</h2>
+        <p class="desc">Tulisan-tulisan yang lahir karena kamu</p>
+        <div class="medium-list">
+            <a href="https://medium.com/" target="_blank" class="medium-card">
+                <h3>Tentang Rindu yang Tak Sempat Kuucap</h3>
+                <p>Sebuah catatan tentang malam-malam panjang yang kunikmati sendirian...</p>
+            </a>
+            <a href="https://medium.com/" target="_blank" class="medium-card">
+                <h3>Bulannya Bertambah, Cintanya Tumbuh</h3>
+                <p>Dua bulan, dua puluh tiga ribu kata yang kuhabiskan hanya untukmu...</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- 💖 Footer -->
+    <footer>
+        <p>Made with 💗 for you — <span id="year"></span></p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
