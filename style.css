@@ -405,3 +405,171 @@ body.locked {
     .gate-hint { padding: 16px 18px; }
     .hint-text { font-size: 13px; }
 }
+
+/* 💌 Contact / Telegram Section */
+.contact-section {
+    padding: 80px 24px;
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.contact-card {
+    position: relative;
+    padding: 60px 40px;
+    background: 
+        radial-gradient(circle at 20% 20%, rgba(247,200,216,0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(201,139,164,0.08) 0%, transparent 40%),
+        linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(247,200,216,0.02) 100%);
+    border: 1px solid rgba(247,200,216,0.15);
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(247,200,216,0.15) 0%, transparent 60%);
+    animation: contactGlow 8s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes contactGlow {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(10%, 10%) scale(1.2); opacity: 0.8; }
+}
+
+.contact-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: inline-block;
+    animation: mailFloat 3s ease-in-out infinite;
+    filter: drop-shadow(0 8px 16px rgba(247,200,216,0.3));
+}
+
+@keyframes mailFloat {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+}
+
+.contact-subtitle {
+    font-size: 12px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--pink);
+    opacity: 0.75;
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 1;
+}
+
+.contact-title {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--soft);
+    position: relative;
+    z-index: 1;
+}
+
+.contact-desc {
+    font-size: 15px;
+    line-height: 1.9;
+    opacity: 0.75;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Tombol Telegram */
+.telegram-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 32px;
+    background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 10px 30px rgba(42,171,238,0.35);
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.telegram-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+}
+
+.telegram-btn:hover::before {
+    left: 100%;
+}
+
+.telegram-btn:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(42,171,238,0.5);
+}
+
+.telegram-btn:active {
+    transform: translateY(-2px) scale(1);
+}
+
+.tg-icon {
+    font-size: 1.2rem;
+    transition: transform 0.4s;
+}
+
+.telegram-btn:hover .tg-icon {
+    transform: rotate(-15deg) scale(1.1);
+}
+
+.tg-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.4s;
+}
+
+.telegram-btn:hover .tg-arrow {
+    transform: translateX(6px);
+}
+
+.contact-hint {
+    margin-top: 28px;
+    font-size: 13px;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    opacity: 0.5;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsif */
+@media (max-width: 500px) {
+    .contact-card { padding: 40px 24px; }
+    .contact-icon { font-size: 2.5rem; }
+    .contact-title { font-size: 1.6rem; }
+    .telegram-btn {
+        padding: 16px 24px;
+        font-size: 14px;
+        gap: 8px;
+    }
+    .tg-icon, .tg-arrow { font-size: 1rem; }
+}
