@@ -3,8 +3,6 @@ const CORRECT_PASSWORD = "KAIA";
 
 // Kunci body saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
-    document.body.classList.add('locked');
-    
     if (sessionStorage.getItem('unlocked') === 'true') {
         unlockGate(true);
     }
@@ -80,24 +78,154 @@ function toggleMusic() {
     isPlaying = !isPlaying;
 }
 
-// Auto-play saat user pertama kali klik di halaman
-document.addEventListener('click', function startOnce() {
-    if (!isPlaying) {
-        music.volume = 0.5;
-        music.play().then(() => {
-            isPlaying = true;
-            musicBtn.textContent = '❚❚';
-            const bars = document.getElementById('musicBars');
-            if (bars) bars.classList.add('active');
-        }).catch(() => {});
+// ================================
+// 📖 SLIDE NAVIGATION SYSTEM
+// ================================
+let currentSlide = 0;
+const totalSlides = 7; // Slide 0 sampai 6
+
+function initSlideDots() {
+    const dotsContainer = document.getElementById('slideDots');
+    if (!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    
+    for (let i = 0; i < totalSlides; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.dataset.slide = i;
+        dot.onclick = () => goToSlide(i);
+        dotsContainer.appendChild(dot);
     }
-    document.removeEventListener('click', startOnce);
-}, { once: true });
+}
+
+function updateSlideUI() {
+    // Update dots
+    document.querySelectorAll('.dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === currentSlide);
+    });
+    
+    // Update arrow buttons
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const nav = document.getElementById('slideNav');
+    const footer = document.querySelector('.mini-footer');
+    
+    if (prevBtn) prevBtn.disabled = currentSlide === 0;
+    
+    // Slide terakhir: tampilkan tanda khusus
+    if (nextBtn) {
+        if (currentSlide === totalSlides - 1) {
+            nextBtn.style.opacity = '0.3';
+            nextBtn.disabled = true;
+        } else {
+            nextBtn.style.opacity = '1';
+            nextBtn.disabled = false;
+        }
+    }
+    
+    // Sembunyikan navigasi di slide 0 (hero) — biar kelihatan bersih
+    if (nav) {
+        if (currentSlide === 0) {
+            nav.classList.add('hidden');
+        } else {
+            nav.classList.remove('hidden');
+        }
+    }
+    
+    // Sembunyikan footer di slide selain 0
+    if (footer) {
+        if (currentSlide === 0) {
+            footer.classList.remove('hidden');
+        } else {
+            footer.classList.add('hidden');
+        }
+    }
+}
+
+function goToSlide(index) {
+    if (index < 0 || index >= totalSlides) return;
+    
+    const slides = document.querySelectorAll('.slide');
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+    
+    currentSlide = index;
+    updateSlideUI();
+    
+    // Reset scroll di slide baru
+    const activeSlide = document.querySelector('.slide.active');
+    if (activeSlide) activeSlide.scrollTop = 0;
+}
+
+function nextSlide() {
+    if (currentSlide < totalSlides - 1) {
+        goToSlide(currentSlide + 1);
+    }
+}
+
+function prevSlide() {
+    if (currentSlide > 0) {
+        goToSlide(currentSlide - 1);
+    }
+}
+
+// ⌨️ Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    // Jangan aktif kalau password gate masih terbuka
+    const gate = document.getElementById('passwordGate');
+    if (gate && !gate.classList.contains('unlocked')) return;
+    
+    // Jangan aktif kalau user sedang ngetik di input
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        e.preventDefault();
+        nextSlide();
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        e.preventDefault();
+        prevSlide();
+    }
+});
+
+// 👆 Touch swipe untuk mobile
+let touchStartX = 0;
+let touchStartY = 0;
+let touchEndX = 0;
+let touchEndY = 0;
+
+document.addEventListener('touchstart', function(e) {
+    touchStartX = e.changedTouches[0].screenX;
+    touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+document.addEventListener('touchend', function(e) {
+    touchEndX = e.changedTouches[0].screenX;
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+}, { passive: true });
+
+function handleSwipe() {
+    const gate = document.getElementById('passwordGate');
+    if (gate && !gate.classList.contains('unlocked')) return;
+    
+    const deltaX = touchEndX - touchStartX;
+    const deltaY = touchEndY - touchStartY;
+    
+    // Hanya trigger kalau swipe horizontal & cukup jauh
+    if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX < 0) {
+            nextSlide(); // swipe ke kiri = next
+        } else {
+            prevSlide(); // swipe ke kanan = prev
+        }
+    }
+}
 
 // 🌸 Falling Petals
 function createPetals() {
     const petals = ['🌸', '🌷', '🌺', '💮', '🌼'];
-    const totalPetals = 12;
+    const totalPetals = 10;
     
     for (let i = 0; i < totalPetals; i++) {
         const petal = document.createElement('div');
@@ -159,44 +287,13 @@ function typeWriter() {
     setTimeout(type, 500);
 }
 
-// 💫 Parallax Hero
-function initParallax() {
-    window.addEventListener('scroll', () => {
-        const hero = document.querySelector('.hero-content');
-        if (!hero) return;
-        
-        const scrolled = window.scrollY;
-        if (scrolled < window.innerHeight) {
-            hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-            hero.style.opacity = 1 - (scrolled / window.innerHeight);
-        }
-    });
-}
-
-// 🎬 Animasi scroll (fade-in)
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
-        }
-    });
-}, { threshold: 0.15 });
-
 // 🚀 Inisialisasi semua efek saat halaman siap
 document.addEventListener('DOMContentLoaded', function() {
     createPetals();
     createHeartCursor();
     typeWriter();
-    initParallax();
-    
-    // Fade-in sections
-    document.querySelectorAll('section:not(.hero)').forEach(sec => {
-        sec.style.opacity = '0';
-        sec.style.transform = 'translateY(40px)';
-        sec.style.transition = 'all 1s ease';
-        observer.observe(sec);
-    });
+    initSlideDots();
+    updateSlideUI();
     
     // Tahun otomatis di footer
     const yearEl = document.getElementById('year');
