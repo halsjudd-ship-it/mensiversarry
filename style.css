@@ -7,13 +7,17 @@
     --accent: #c98ba4;
 }
 
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background: linear-gradient(-45deg, #1a1420, #2a1e35, #1f1a2e, #241a2c);
     background-size: 400% 400%;
     animation: gradientShift 20s ease infinite;
     color: var(--soft);
-    overflow-x: hidden;
     scroll-behavior: smooth;
 }
 
@@ -34,18 +38,11 @@ h1, h2 { font-family: 'Playfair Display', serif; }
     animation: fall linear infinite;
     user-select: none;
 }
-
 @keyframes fall {
-    0% {
-        transform: translateY(-50px) rotate(0deg) translateX(0);
-        opacity: 0;
-    }
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 0; }
     10% { opacity: 1; }
     90% { opacity: 1; }
-    100% {
-        transform: translateY(110vh) rotate(360deg) translateX(60px);
-        opacity: 0;
-    }
+    100% { transform: translateY(110vh) rotate(360deg) translateX(60px); opacity: 0; }
 }
 
 /* 🎯 Heart Cursor */
@@ -64,7 +61,7 @@ h1, h2 { font-family: 'Playfair Display', serif; }
     position: fixed;
     top: 20px;
     right: 20px;
-    z-index: 999;
+    z-index: 1000;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -87,7 +84,6 @@ h1, h2 { font-family: 'Playfair Display', serif; }
 .music-player button:hover { transform: scale(1.1); }
 .music-label { font-size: 12px; opacity: 0.7; }
 
-/* 🎵 Music Bars (Equalizer) */
 .music-bars {
     display: flex;
     align-items: center;
@@ -116,18 +112,55 @@ h1, h2 { font-family: 'Playfair Display', serif; }
     50% { height: 18px; }
 }
 
-/* ✨ Hero */
-.hero {
+/* 📖 Slide Container */
+.slide-container {
+    position: relative;
+    width: 100%;
     height: 100vh;
+    overflow: hidden;
+}
+
+/* 📄 Slide */
+.slide {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    background: radial-gradient(circle at 50% 30%, rgba(52,40,64,0.6) 0%, rgba(26,20,32,0.3) 60%);
-    position: relative;
-    overflow: hidden;
+    padding: 80px 24px 100px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease, visibility 0.7s;
+    overflow-y: auto;
+    z-index: 1;
 }
-.stars {
+
+.slide.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    z-index: 2;
+}
+
+.slide-inner {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    margin: auto;
+}
+
+/* Untuk slide dengan banyak konten (letter, galeri) */
+.slide[data-slide="1"] .slide-inner,
+.slide[data-slide="3"] .slide-inner {
+    max-width: 700px;
+}
+
+/* ✨ HERO SLIDE */
+.slide[data-slide="0"] {
+    background: radial-gradient(circle at 50% 30%, rgba(52,40,64,0.6) 0%, rgba(26,20,32,0.3) 60%);
+}
+.slide[data-slide="0"] .stars {
     position: absolute; inset: 0;
     background-image: radial-gradient(2px 2px at 20% 30%, #fff, transparent),
                       radial-gradient(1px 1px at 60% 70%, #f7c8d8, transparent),
@@ -137,7 +170,7 @@ h1, h2 { font-family: 'Playfair Display', serif; }
 }
 @keyframes twinkle { from { opacity: 0.4; } to { opacity: 1; } }
 
-.hero-content { position: relative; z-index: 2; animation: fadeUp 1.5s ease; }
+.hero-content { position: relative; z-index: 2; text-align: center; }
 .subtitle {
     font-size: 14px;
     letter-spacing: 4px;
@@ -178,28 +211,17 @@ h1, h2 { font-family: 'Playfair Display', serif; }
     border-radius: 30px;
     text-decoration: none;
     font-size: 14px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
     transition: 0.4s;
 }
 .scroll-btn:hover { background: var(--pink); color: var(--dark); }
 
-@keyframes fadeUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Sections */
-section {
-    padding: 100px 24px;
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: center;
-    position: relative;
-    z-index: 2;
-}
-section h2 {
-    font-size: clamp(1.8rem, 4vw, 2.5rem);
+/* 📝 Section Heading */
+.slide h2 {
+    font-size: clamp(1.6rem, 4vw, 2.3rem);
     font-style: italic;
-    margin-bottom: 30px;
+    margin-bottom: 24px;
     color: var(--pink);
     animation: glow 3s ease-in-out infinite;
 }
@@ -213,34 +235,31 @@ section h2 {
                      0 0 40px rgba(247,200,216,0.3);
     }
 }
-.desc { font-size: 14px; opacity: 0.6; margin-bottom: 40px; }
+.desc { font-size: 14px; opacity: 0.6; margin-bottom: 30px; }
 
 /* 💌 Letter */
 .letter-card {
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(247,200,216,0.2);
     border-radius: 20px;
-    padding: 40px;
+    padding: 36px;
     text-align: left;
-    line-height: 2;
-    font-size: 15px;
+    line-height: 1.9;
+    font-size: 14px;
     box-shadow: 0 20px 60px rgba(0,0,0,0.3);
 }
 .letter-card em { color: var(--pink); font-family: 'Playfair Display', serif; }
 
-/* 🎧 Playlist */
-.playlist-section { padding-top: 60px; }
-
 /* 📸 Gallery */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 24px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 18px;
     margin-top: 20px;
 }
 .polaroid {
     background: #fff;
-    padding: 12px 12px 40px;
+    padding: 10px 10px 32px;
     border-radius: 4px;
     transform: rotate(-2deg);
     transition: 0.4s;
@@ -254,21 +273,20 @@ section h2 {
     color: #333;
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: 14px;
-    margin-top: 12px;
+    font-size: 12px;
+    margin-top: 10px;
 }
 
 /* ✍️ Medium */
 .medium-list {
     display: grid;
     gap: 16px;
-    margin-top: 20px;
 }
 .medium-card-2 {
     display: flex;
     align-items: center;
-    gap: 20px;
-    padding: 20px;
+    gap: 18px;
+    padding: 18px;
     background: rgba(255,255,255,0.04);
     border: 1px solid rgba(247,200,216,0.12);
     border-radius: 16px;
@@ -283,8 +301,8 @@ section h2 {
     box-shadow: 0 15px 40px rgba(0,0,0,0.4);
 }
 .medium-thumb {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     background-size: cover;
     background-position: center;
     border-radius: 12px;
@@ -293,41 +311,35 @@ section h2 {
 }
 .medium-content-2 { flex: 1; }
 .medium-meta {
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 2px;
     text-transform: uppercase;
     color: var(--pink);
     opacity: 0.7;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 .medium-content-2 h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.15rem;
-    margin-bottom: 8px;
+    font-size: 1rem;
+    margin-bottom: 6px;
     line-height: 1.4;
 }
 .medium-content-2 p {
-    font-size: 13px;
+    font-size: 12px;
     opacity: 0.7;
-    line-height: 1.6;
+    line-height: 1.5;
 }
 .medium-arrow {
     color: var(--pink);
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     transition: transform 0.4s;
 }
 .medium-card-2:hover .medium-arrow { transform: translateX(6px); }
 
 /* 💌 Contact / Telegram */
-.contact-section {
-    padding: 80px 24px;
-    max-width: 600px;
-    margin: 0 auto;
-    text-align: center;
-}
 .contact-card {
     position: relative;
-    padding: 60px 40px;
+    padding: 50px 32px;
     background: 
         radial-gradient(circle at 20% 20%, rgba(247,200,216,0.08) 0%, transparent 40%),
         radial-gradient(circle at 80% 80%, rgba(201,139,164,0.08) 0%, transparent 40%),
@@ -353,56 +365,55 @@ section h2 {
     50% { transform: translate(10%, 10%) scale(1.2); opacity: 0.8; }
 }
 .contact-icon {
-    font-size: 3rem;
-    margin-bottom: 20px;
+    font-size: 2.8rem;
+    margin-bottom: 16px;
     display: inline-block;
     animation: mailFloat 3s ease-in-out infinite;
     filter: drop-shadow(0 8px 16px rgba(247,200,216,0.3));
 }
 @keyframes mailFloat {
     0%, 100% { transform: translateY(0) rotate(-3deg); }
-    50% { transform: translateY(-12px) rotate(3deg); }
+    50% { transform: translateY(-10px) rotate(3deg); }
 }
 .contact-subtitle {
-    font-size: 12px;
+    font-size: 11px;
     letter-spacing: 4px;
     text-transform: uppercase;
     color: var(--pink);
     opacity: 0.75;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     position: relative;
     z-index: 1;
 }
 .contact-title {
     font-family: 'Playfair Display', serif;
     font-style: italic;
-    font-size: clamp(1.8rem, 5vw, 2.5rem);
+    font-size: clamp(1.6rem, 4vw, 2.2rem);
     line-height: 1.2;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     color: var(--soft);
     position: relative;
     z-index: 1;
 }
 .contact-desc {
-    font-size: 15px;
-    line-height: 1.9;
+    font-size: 14px;
+    line-height: 1.8;
     opacity: 0.75;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     position: relative;
     z-index: 1;
 }
 .telegram-btn {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
-    padding: 18px 32px;
+    gap: 10px;
+    padding: 16px 28px;
     background: linear-gradient(135deg, #2AABEE 0%, #229ED9 100%);
     color: #fff;
     text-decoration: none;
     border-radius: 50px;
     font-family: 'Poppins', sans-serif;
-    font-size: 15px;
-    font-weight: 400;
+    font-size: 14px;
     letter-spacing: 0.5px;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 10px 30px rgba(42,171,238,0.35);
@@ -413,10 +424,8 @@ section h2 {
 .telegram-btn::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    top: 0; left: -100%;
+    width: 100%; height: 100%;
     background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
     transition: left 0.6s ease;
 }
@@ -425,20 +434,12 @@ section h2 {
     transform: translateY(-4px) scale(1.02);
     box-shadow: 0 15px 40px rgba(42,171,238,0.5);
 }
-.telegram-btn:active { transform: translateY(-2px) scale(1); }
-.tg-icon {
-    font-size: 1.2rem;
-    transition: transform 0.4s;
-}
+.tg-icon, .tg-arrow { transition: transform 0.4s; }
 .telegram-btn:hover .tg-icon { transform: rotate(-15deg) scale(1.1); }
-.tg-arrow {
-    font-size: 1.2rem;
-    transition: transform 0.4s;
-}
 .telegram-btn:hover .tg-arrow { transform: translateX(6px); }
 .contact-hint {
-    margin-top: 28px;
-    font-size: 13px;
+    margin-top: 22px;
+    font-size: 12px;
     font-style: italic;
     font-family: 'Playfair Display', serif;
     opacity: 0.5;
@@ -446,17 +447,148 @@ section h2 {
     z-index: 1;
 }
 
-/* 💖 Footer */
-footer {
-    text-align: center;
-    padding: 40px;
-    font-size: 13px;
-    opacity: 0.5;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    position: relative;
-    z-index: 2;
+/* 🌙 Closing Slide */
+.closing-slide {
+    padding: 40px 20px;
 }
-.hint { font-size: 11px; opacity: 0.4; margin-top: 12px; }
+.closing-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: moonFloat 4s ease-in-out infinite;
+}
+@keyframes moonFloat {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-12px) scale(1.05); }
+}
+.closing-title {
+    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-style: italic;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--pink);
+    animation: glow 3s ease-in-out infinite;
+}
+.closing-text {
+    font-size: 15px;
+    line-height: 2;
+    opacity: 0.85;
+    margin-bottom: 30px;
+}
+.closing-hearts {
+    font-size: 1.5rem;
+    letter-spacing: 12px;
+    margin-bottom: 24px;
+    animation: heartbeat 2s ease-in-out infinite;
+}
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+.closing-sign {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--pink);
+    margin-bottom: 40px;
+}
+.restart-btn {
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--pink);
+    border: 1px solid var(--pink);
+    border-radius: 30px;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+    cursor: pointer;
+    transition: 0.4s;
+    letter-spacing: 1px;
+}
+.restart-btn:hover {
+    background: var(--pink);
+    color: var(--dark);
+}
+
+/* 🎯 Slide Navigation */
+.slide-nav {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(26,20,32,0.6);
+    backdrop-filter: blur(12px);
+    padding: 10px 18px;
+    border-radius: 50px;
+    border: 1px solid rgba(247,200,216,0.15);
+    z-index: 100;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+.slide-nav.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(247,200,216,0.15);
+    border: 1px solid rgba(247,200,216,0.25);
+    color: var(--pink);
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+.nav-btn:hover:not(:disabled) {
+    background: var(--pink);
+    color: var(--dark);
+    transform: scale(1.1);
+}
+.nav-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.slide-dots {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+.dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(247,200,216,0.25);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.dot.active {
+    background: var(--pink);
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* 📌 Mini Footer */
+.mini-footer {
+    position: fixed;
+    bottom: 8px;
+    left: 12px;
+    font-size: 10px;
+    opacity: 0.35;
+    z-index: 100;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+.mini-footer.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
 
 /* 🔐 Password Gate */
 .password-gate {
@@ -479,7 +611,6 @@ footer {
     max-width: 460px;
     width: 100%;
     text-align: center;
-    animation: fadeUp 1s ease;
 }
 .lock-icon {
     font-size: 3.5rem;
@@ -544,8 +675,6 @@ footer {
     border-radius: 12px;
     font-family: 'Poppins', sans-serif;
     font-size: 15px;
-    font-weight: 400;
-    letter-spacing: 1px;
     cursor: pointer;
     transition: all 0.3s;
 }
@@ -554,13 +683,11 @@ footer {
     transform: translateY(-2px);
     box-shadow: 0 10px 30px rgba(247,200,216,0.3);
 }
-.gate-form button:active { transform: translateY(0); }
 .gate-error {
     font-size: 13px;
     color: #ff8b9d;
     height: 20px;
     margin-bottom: 20px;
-    letter-spacing: 1px;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -595,29 +722,19 @@ footer {
     color: var(--soft);
     opacity: 0.85;
 }
-body.locked { overflow: hidden; }
 
 /* 📱 Responsif */
 @media (max-width: 600px) {
     .music-label { display: none; }
-    .letter-card { padding: 24px; font-size: 14px; }
-    section { padding: 70px 20px; }
+    .letter-card { padding: 24px; font-size: 13px; }
+    .slide { padding: 70px 16px 110px; }
     .medium-card-2 { flex-direction: column; text-align: center; }
-    .medium-thumb { width: 100%; height: 180px; }
-}
-
-@media (max-width: 500px) {
-    .lock-icon { font-size: 2.8rem; }
-    .gate-title { font-size: 1.6rem; }
-    .gate-hint { padding: 16px 18px; }
-    .hint-text { font-size: 13px; }
-    .contact-card { padding: 40px 24px; }
-    .contact-icon { font-size: 2.5rem; }
-    .contact-title { font-size: 1.6rem; }
-    .telegram-btn {
-        padding: 16px 24px;
-        font-size: 14px;
-        gap: 8px;
-    }
-    .tg-icon, .tg-arrow { font-size: 1rem; }
+    .medium-thumb { width: 100%; height: 160px; }
+    .slide-nav { gap: 12px; padding: 8px 14px; }
+    .nav-btn { width: 36px; height: 36px; font-size: 14px; }
+    .dot { width: 6px; height: 6px; }
+    .dot.active { width: 18px; }
+    .gallery { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; }
+    .closing-icon { font-size: 3rem; }
+    .mini-footer { font-size: 9px; }
 }
