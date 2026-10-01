@@ -9,37 +9,40 @@
 </head>
 <body>
     <!-- 🔐 Password Gate -->
-     <div id="passwordGate" class="password-gate">
+    <div id="passwordGate" class="password-gate">
         <div class="gate-content">
-        <div class="lock-icon">🔐</div>
-        <p class="gate-subtitle">Sebuah surat telah menunggu</p>
-        <h1 class="gate-title">Masukkan Sandi<br>Untuk Membuka</h1>
+            <div class="lock-icon">🔐</div>
+            <p class="gate-subtitle">Sebuah surat telah menunggu</p>
+            <h1 class="gate-title">Masukkan Sandi<br>Untuk Membuka</h1>
 
-        <div class="gate-form">
-            <input 
-                type="password" 
-                id="passwordInput" 
-                placeholder="Tulis di sini..." 
-                autocomplete="off"
-                maxlength="20">
-            <button onclick="checkPassword()">Buka 💌</button>
-        </div>
+            <div class="gate-form">
+                <input 
+                    type="password" 
+                    id="passwordInput" 
+                    placeholder="Tulis di sini..." 
+                    autocomplete="off"
+                    maxlength="20">
+                <button onclick="checkPassword()">Buka 💌</button>
+            </div>
 
-        <p id="gateError" class="gate-error"></p>
+            <p id="gateError" class="gate-error"></p>
 
-        <div class="gate-hint">
-            <p class="hint-label">✨ Petunjuk</p>
-            <p class="hint-text">
-                Nama yang selalu kusebut<br>
-                saat sang pemilik nama
-                melakukan hal yang menyebalkan<br>
-            </p>
+            <div class="gate-hint">
+                <p class="hint-label">✨ Petunjuk</p>
+                <p class="hint-text">
+                    Nama yang selalu kusebut<br>
+                    saat sang pemilik nama<br>
+                    melakukan hal yang menyebalkan
+                </p>
+            </div>
         </div>
     </div>
-</div>
 
     <!-- 🎵 Kontrol Musik Background -->
     <div class="music-player">
+        <div class="music-bars" id="musicBars">
+            <span></span><span></span><span></span><span></span>
+        </div>
         <button id="musicBtn" onclick="toggleMusic()">▶</button>
         <span class="music-label">Play our song</span>
     </div>
@@ -52,7 +55,7 @@
         <div class="stars"></div>
         <div class="hero-content">
             <p class="subtitle">Happy 2nd Mensiversarry</p>
-            <h1 class="title">Untuk Kaia,<br>Selamanya</h1>
+            <h1 class="title" id="heroTitle"></h1>
             <p class="date">03 · 10 · 2026</p>
             <a href="#letter" class="scroll-btn">Buka Surat 💌</a>
         </div>
@@ -88,7 +91,7 @@
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
             loading="lazy">
         </iframe>
-        <p class="hint">Kumpulan Lagu Untuk yang Terkasih </p>
+        <p class="hint">Kumpulan Lagu Untuk yang Terkasih</p>
     </section>
 
     <!-- 📸 Galeri Editan -->
@@ -104,61 +107,62 @@
         </div>
     </section>
 
+    <!-- ✍️ Tulisan Medium -->
     <section class="medium-section">
         <h2>My Thoughts ✍️</h2>
         <p class="desc">Tulisan-tulisan yang lahir karena kamu</p>
         
         <div class="medium-list">
             <a href="https://medium.com/@halsjudd/bentuk-akhir-keindahan-58ed521e89cc"
-            target="_blank" rel="noopener" class="medium-card-2">
-            <div class="medium-thumb" style="background-image: url('assets/thumb1.jpg');"></div>
-            <div class="medium-content-2">
-                <p class="medium-meta">Letter · 2 min read</p>
-                <h3>Bentuk Akhir Keindahan</h3>
-                <p>Sebuah refleksi tentang apa yang tersisa ketika cinta menemukan bentuk akhirnya.</p>
-            </div>
-            <span class="medium-arrow">→</span>
-        </a>
+               target="_blank" rel="noopener" class="medium-card-2">
+                <div class="medium-thumb" style="background-image: url('assets/thumb1.jpg');"></div>
+                <div class="medium-content-2">
+                    <p class="medium-meta">Letter · 2 min read</p>
+                    <h3>Bentuk Akhir Keindahan</h3>
+                    <p>Sebuah refleksi tentang apa yang tersisa ketika cinta menemukan bentuk akhirnya.</p>
+                </div>
+                <span class="medium-arrow">→</span>
+            </a>
 
-        <a href="https://medium.com/@halsjudd/to-you-kaia-the-home-i-never-imagined-i-would-find-d2d75de01760" 
-           target="_blank" rel="noopener" class="medium-card-2">
-            <div class="medium-thumb" style="background-image: url('assets/thumb2.jpg');"></div>
-            <div class="medium-content-2">
-                <p class="medium-meta">Letter · 6 min read</p>
-                <h3>To You, Kaia: The Home I Never Imagined I Would Find</h3>
-                <p>Surat Cinta untuk Kaia.</p>
-            </div>
-            <span class="medium-arrow">→</span>
-        </a>
-    </div>
-</section>
+            <a href="https://medium.com/@halsjudd/to-you-kaia-the-home-i-never-imagined-i-would-find-d2d75de01760" 
+               target="_blank" rel="noopener" class="medium-card-2">
+                <div class="medium-thumb" style="background-image: url('assets/thumb2.jpg');"></div>
+                <div class="medium-content-2">
+                    <p class="medium-meta">Letter · 6 min read</p>
+                    <h3>To You, Kaia: The Home I Never Imagined I Would Find</h3>
+                    <p>Surat Cinta untuk Kaia.</p>
+                </div>
+                <span class="medium-arrow">→</span>
+            </a>
+        </div>
+    </section>
 
-<!-- 💌 Kirim Pesan ke Telegram -->
-<section class="contact-section">
-    <div class="contact-card">
-        <div class="contact-icon">💌</div>
-        <p class="contact-subtitle">Ada yang ingin kamu sampaikan?</p>
-        <h2 class="contact-title">Kirim Pesan<br>Untukku</h2>
-        <p class="contact-desc">
-            Kalau ada yang ingin kamu bisikkan,<br>
-            ceritakan, atau tuliskan—<br>
-            kirimkan pesan ke Pacarmu, ya.
-        </p>
+    <!-- 💌 Kirim Pesan ke Telegram -->
+    <section class="contact-section">
+        <div class="contact-card">
+            <div class="contact-icon">💌</div>
+            <p class="contact-subtitle">Ada yang ingin kamu sampaikan?</p>
+            <h2 class="contact-title">Kirim Pesan<br>Untukku</h2>
+            <p class="contact-desc">
+                Kalau ada yang ingin kamu bisikkan,<br>
+                ceritakan, atau tuliskan—<br>
+                kirimkan pesan ke Pacarmu, ya.
+            </p>
 
-        <a href="https://t.me/Cwesar" 
-           target="_blank" 
-           rel="noopener" 
-           class="telegram-btn">
-            <span class="tg-icon">✈️</span>
-            <span class="tg-text">Kirim Lewat Telegram</span>
-            <span class="tg-arrow">→</span>
-        </a>
+            <a href="https://t.me/Cwesar" 
+               target="_blank" 
+               rel="noopener" 
+               class="telegram-btn">
+                <span class="tg-icon">✈️</span>
+                <span class="tg-text">Kirim Lewat Telegram</span>
+                <span class="tg-arrow">→</span>
+            </a>
 
-        <p class="contact-hint">
-            Jangan lupa kasih reward buat aku ya, Adek.
-        </p>
-    </div>
-</section>
+            <p class="contact-hint">
+                Jangan lupa kasih reward buat aku ya, Adek.
+            </p>
+        </div>
+    </section>
 
     <!-- 💖 Footer -->
     <footer>
