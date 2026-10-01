@@ -7,7 +7,8 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,400&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="locked">
+
     <!-- 🔐 Password Gate -->
     <div id="passwordGate" class="password-gate">
         <div class="gate-content">
@@ -50,124 +51,175 @@
         <source src="assets/lagu.mp3" type="audio/mpeg">
     </audio>
 
-    <!-- ✨ Hero Section -->
-    <section class="hero">
-        <div class="stars"></div>
-        <div class="hero-content">
-            <p class="subtitle">Happy 2nd Mensiversarry</p>
-            <h1 class="title" id="heroTitle"></h1>
-            <p class="date">03 · 10 · 2026</p>
-            <a href="#letter" class="scroll-btn">Buka Surat 💌</a>
-        </div>
-    </section>
+    <!-- 📖 Slide Container -->
+    <div class="slide-container" id="slideContainer">
 
-    <!-- 💌 Love Letter -->
-    <section id="letter" class="letter-section">
-        <h2>Love Letter</h2>
-        <div class="letter-card">
-            <p>
-                Sayang,<br><br>
-                Dua bulan mungkin singkat bagi orang lain, tapi menurutku setiap harinya sama kamu
-                adalah bab baru yang paling indah. Terima kasih sudah hadir, tertawa, dan bertahan
-                di setiap cerita kita.<br><br>
-                Kali ini, izinkan aku berbisik dengan suara yang lahir dari relung terdalam, dari
-                sudut hati yang paling gulita, "Terima kasih sudah menemaniku, Kaia."<br><br>
-                Jika dunia bertanya mengapa aku begitu menggenggammu, aku hanya akan tersenyum
-                dan kembali berbisik, "sebab Kaia bukan sekadar kekasih, ia adalah rumah bagi
-                jiwa yang selama ini mengembara, dan aku tak pernah menyesal pulang."<br><br>
-                Selamat kembali memperingati hari jadi, Sayang. ♥️<br><br>
-                <em>— Selamanya milikmu, JH.</em>
-            </p>
-        </div>
-    </section>
+        <!-- ============================ -->
+        <!-- SLIDE 0: HERO / COVER AMPLOP -->
+        <!-- ============================ -->
+        <section class="slide active" data-slide="0">
+            <div class="stars"></div>
+            <div class="hero-content">
+                <p class="subtitle">Happy 2nd Mensiversarry</p>
+                <h1 class="title" id="heroTitle"></h1>
+                <p class="date">03 · 10 · 2026</p>
+                <button class="scroll-btn" onclick="goToSlide(1)">Buka Surat 💌</button>
+            </div>
+        </section>
 
-    <!-- 🎧 Spotify Playlist -->
-    <section class="playlist-section">
-        <h2>Our Playlist 🎶</h2>
-        <p class="desc">Setiap tanggal tiga, untuk kamu</p>
-        <iframe style="border-radius:12px" 
-            src="https://open.spotify.com/embed/playlist/6bp15u09chTJ5B1uO6nSVF?utm_source=generator&theme=0" 
-            width="100%" height="380" frameBorder="0" allowfullscreen="" 
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-            loading="lazy">
-        </iframe>
-        <p class="hint">Kumpulan Lagu Untuk yang Terkasih</p>
-    </section>
-
-    <!-- 📸 Galeri Editan -->
-    <section class="gallery-section">
-        <h2>Our Moments 📸</h2>
-        <div class="gallery">
-            <div class="polaroid"><img src="assets/foto1.jpg" alt="kenangan 1"><span>Bukti Judd sayang Kaia</span></div>
-            <div class="polaroid"><img src="assets/foto2.jpg" alt="kenangan 2"><span>K & J</span></div>
-            <div class="polaroid"><img src="assets/foto3.jpg" alt="kenangan 3"><span>Day one becomes "US"</span></div>
-            <div class="polaroid"><img src="assets/foto4.jpg" alt="kenangan 4"><span>Si cantik pemakan segala</span></div>
-            <div class="polaroid"><img src="assets/foto5.jpg" alt="kenangan 5"><span>Bocah minum apaan tuh? Kok gak bagi-bagi?</span></div>
-            <div class="polaroid"><img src="assets/foto6.jpg" alt="kenangan 6"><span>Bidadari dari manaa ini? Cantik sekali, Sayangku</span></div>
-        </div>
-    </section>
-
-    <!-- ✍️ Tulisan Medium -->
-    <section class="medium-section">
-        <h2>My Thoughts ✍️</h2>
-        <p class="desc">Tulisan-tulisan yang lahir karena kamu</p>
-        
-        <div class="medium-list">
-            <a href="https://medium.com/@halsjudd/bentuk-akhir-keindahan-58ed521e89cc"
-               target="_blank" rel="noopener" class="medium-card-2">
-                <div class="medium-thumb" style="background-image: url('assets/thumb1.jpg');"></div>
-                <div class="medium-content-2">
-                    <p class="medium-meta">Letter · 2 min read</p>
-                    <h3>Bentuk Akhir Keindahan</h3>
-                    <p>Sebuah refleksi tentang apa yang tersisa ketika cinta menemukan bentuk akhirnya.</p>
+        <!-- ============================ -->
+        <!-- SLIDE 1: LOVE LETTER -->
+        <!-- ============================ -->
+        <section class="slide" data-slide="1">
+            <div class="slide-inner">
+                <h2>Love Letter</h2>
+                <div class="letter-card">
+                    <p>
+                        Sayang,<br><br>
+                        Dua bulan mungkin singkat bagi orang lain, tapi menurutku setiap harinya sama kamu
+                        adalah bab baru yang paling indah. Terima kasih sudah hadir, tertawa, dan bertahan
+                        di setiap cerita kita.<br><br>
+                        Kali ini, izinkan aku berbisik dengan suara yang lahir dari relung terdalam, dari
+                        sudut hati yang paling gulita, "Terima kasih sudah menemani, Kaia."<br><br>
+                        Jika dunia bertanya mengapa aku begitu menggenggammu, aku hanya akan tersenyum
+                        dan kembali berbisik, "sebab Kaia bukan sekadar kekasih, ia adalah rumah bagi
+                        jiwa yang selama ini mengembara, dan aku tak pernah menyesal pulang."<br><br>
+                        Selamat kembali memperingati hari jadi, Sayang. ♥️<br><br>
+                        <em>— Selamanya milikmu, JH.</em>
+                    </p>
                 </div>
-                <span class="medium-arrow">→</span>
-            </a>
+            </div>
+        </section>
 
-            <a href="https://medium.com/@halsjudd/to-you-kaia-the-home-i-never-imagined-i-would-find-d2d75de01760" 
-               target="_blank" rel="noopener" class="medium-card-2">
-                <div class="medium-thumb" style="background-image: url('assets/thumb2.jpg');"></div>
-                <div class="medium-content-2">
-                    <p class="medium-meta">Letter · 6 min read</p>
-                    <h3>To You, Kaia: The Home I Never Imagined I Would Find</h3>
-                    <p>Surat Cinta untuk Kaia.</p>
+        <!-- ============================ -->
+        <!-- SLIDE 2: PLAYLIST -->
+        <!-- ============================ -->
+        <section class="slide" data-slide="2">
+            <div class="slide-inner">
+                <h2>Our Playlist 🎶</h2>
+                <p class="desc">Setiap tanggal tiga, untuk kamu</p>
+                <iframe style="border-radius:12px" 
+                    src="https://open.spotify.com/embed/playlist/6bp15u09chTJ5B1uO6nSVF?utm_source=generator&theme=0" 
+                    width="100%" height="380" frameBorder="0" allowfullscreen="" 
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                    loading="lazy">
+                </iframe>
+                <p class="hint">Kumpulan Lagu Untuk yang Terkasih</p>
+            </div>
+        </section>
+
+        <!-- ============================ -->
+        <!-- SLIDE 3: GALERI -->
+        <!-- ============================ -->
+        <section class="slide" data-slide="3">
+            <div class="slide-inner">
+                <h2>Our Moments 📸</h2>
+                <div class="gallery">
+                    <div class="polaroid"><img src="assets/foto1.jpg" alt="kenangan 1"><span>Bukti Judd sayang Kaia</span></div>
+                    <div class="polaroid"><img src="assets/foto2.jpg" alt="kenangan 2"><span>K & J</span></div>
+                    <div class="polaroid"><img src="assets/foto3.jpg" alt="kenangan 3"><span>Day one becomes "US"</span></div>
+                    <div class="polaroid"><img src="assets/foto4.jpg" alt="kenangan 4"><span>Si cantik pemakan segala</span></div>
+                    <div class="polaroid"><img src="assets/foto5.jpg" alt="kenangan 5"><span>Bocah minum apaan tuh?</span></div>
+                    <div class="polaroid"><img src="assets/foto6.jpg" alt="kenangan 6"><span>Bidadari dari manaa ini?</span></div>
                 </div>
-                <span class="medium-arrow">→</span>
-            </a>
+            </div>
+        </section>
+
+        <!-- ============================ -->
+        <!-- SLIDE 4: MEDIUM -->
+        <!-- ============================ -->
+        <section class="slide" data-slide="4">
+            <div class="slide-inner">
+                <h2>My Thoughts ✍️</h2>
+                <p class="desc">Tulisan-tulisan yang lahir karena kamu</p>
+                
+                <div class="medium-list">
+                    <a href="https://medium.com/@halsjudd/bentuk-akhir-keindahan-58ed521e89cc"
+                       target="_blank" rel="noopener" class="medium-card-2">
+                        <div class="medium-thumb" style="background-image: url('assets/thumb1.jpg');"></div>
+                        <div class="medium-content-2">
+                            <p class="medium-meta">Letter · 2 min read</p>
+                            <h3>Bentuk Akhir Keindahan</h3>
+                            <p>Sebuah refleksi tentang apa yang tersisa ketika cinta menemukan bentuk akhirnya.</p>
+                        </div>
+                        <span class="medium-arrow">→</span>
+                    </a>
+
+                    <a href="https://medium.com/@halsjudd/to-you-kaia-the-home-i-never-imagined-i-would-find-d2d75de01760" 
+                       target="_blank" rel="noopener" class="medium-card-2">
+                        <div class="medium-thumb" style="background-image: url('assets/thumb2.jpg');"></div>
+                        <div class="medium-content-2">
+                            <p class="medium-meta">Letter · 6 min read</p>
+                            <h3>To You, Kaia: The Home I Never Imagined I Would Find</h3>
+                            <p>Surat Cinta untuk Kaia.</p>
+                        </div>
+                        <span class="medium-arrow">→</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ -->
+        <!-- SLIDE 5: TELEGRAM -->
+        <!-- ============================ -->
+        <section class="slide" data-slide="5">
+            <div class="slide-inner">
+                <div class="contact-card">
+                    <div class="contact-icon">💌</div>
+                    <p class="contact-subtitle">Ada yang ingin kamu sampaikan?</p>
+                    <h2 class="contact-title">Kirim Pesan<br>Untukku</h2>
+                    <p class="contact-desc">
+                        Kalau ada yang ingin kamu bisikkan,<br>
+                        ceritakan, atau tuliskan—<br>
+                        kirimkan pesan ke Pacarmu, ya.
+                    </p>
+
+                    <a href="https://t.me/Cwesar" 
+                       target="_blank" 
+                       rel="noopener" 
+                       class="telegram-btn">
+                        <span class="tg-icon">✈️</span>
+                        <span class="tg-text">Kirim Lewat Telegram</span>
+                        <span class="tg-arrow">→</span>
+                    </a>
+
+                    <p class="contact-hint">
+                        Jangan lupa kasih reward buat aku ya, Adek.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================ -->
+        <!-- SLIDE 6: PENUTUP -->
+        <!-- ============================ -->
+        <section class="slide" data-slide="6">
+            <div class="slide-inner closing-slide">
+                <div class="closing-icon">🌙</div>
+                <h1 class="closing-title">Terima Kasih,<br>Kaia</h1>
+                <p class="closing-text">
+                    Untuk dua bulan yang penuh cerita,<br>
+                    dan untuk semua bulan yang akan datang.
+                </p>
+                <div class="closing-hearts">💕 ✨ 💕</div>
+                <p class="closing-sign">— JH</p>
+                <button class="restart-btn" onclick="goToSlide(0)">↺ Buka Lagi</button>
+            </div>
+        </section>
+
+        <!-- 🎯 Navigasi Slide -->
+        <div class="slide-nav" id="slideNav">
+            <button class="nav-btn prev" onclick="prevSlide()" id="prevBtn">←</button>
+            <div class="slide-dots" id="slideDots"></div>
+            <button class="nav-btn next" onclick="nextSlide()" id="nextBtn">→</button>
         </div>
-    </section>
 
-    <!-- 💌 Kirim Pesan ke Telegram -->
-    <section class="contact-section">
-        <div class="contact-card">
-            <div class="contact-icon">💌</div>
-            <p class="contact-subtitle">Ada yang ingin kamu sampaikan?</p>
-            <h2 class="contact-title">Kirim Pesan<br>Untukku</h2>
-            <p class="contact-desc">
-                Kalau ada yang ingin kamu bisikkan,<br>
-                ceritakan, atau tuliskan—<br>
-                kirimkan pesan ke Pacarmu, ya.
-            </p>
+    </div>
 
-            <a href="https://t.me/Cwesar" 
-               target="_blank" 
-               rel="noopener" 
-               class="telegram-btn">
-                <span class="tg-icon">✈️</span>
-                <span class="tg-text">Kirim Lewat Telegram</span>
-                <span class="tg-arrow">→</span>
-            </a>
-
-            <p class="contact-hint">
-                Jangan lupa kasih reward buat aku ya, Adek.
-            </p>
-        </div>
-    </section>
-
-    <!-- 💖 Footer -->
-    <footer>
+    <!-- 💖 Footer (hanya di slide 0) -->
+    <div class="mini-footer">
         <p>Made with love for you, Kaia <span id="year"></span></p>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
