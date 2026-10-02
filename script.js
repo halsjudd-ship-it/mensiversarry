@@ -1,7 +1,8 @@
-// 🔐 Password Gate
+// ================================
+// 🔐 PASSWORD GATE
+// ================================
 const CORRECT_PASSWORD = "KAIA";
 
-// Kunci body saat halaman dimuat
 document.addEventListener('DOMContentLoaded', function() {
     if (sessionStorage.getItem('unlocked') === 'true') {
         unlockGate(true);
@@ -48,7 +49,7 @@ function unlockGate(silent = false) {
     }, 800);
 }
 
-// Enter untuk submit
+// Enter untuk submit password
 document.addEventListener('DOMContentLoaded', function() {
     const input = document.getElementById('passwordInput');
     if (input) {
@@ -59,7 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// 🎵 Toggle Musik Background
+// ================================
+// 🎵 MUSIC TOGGLE
+// ================================
 const music = document.getElementById('bgMusic');
 const musicBtn = document.getElementById('musicBtn');
 let isPlaying = false;
@@ -99,12 +102,10 @@ function initSlideDots() {
 }
 
 function updateSlideUI() {
-    // Update dots
     document.querySelectorAll('.dot').forEach((dot, i) => {
         dot.classList.toggle('active', i === currentSlide);
     });
     
-    // Update arrow buttons
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const nav = document.getElementById('slideNav');
@@ -112,7 +113,6 @@ function updateSlideUI() {
     
     if (prevBtn) prevBtn.disabled = currentSlide === 0;
     
-    // Slide terakhir: tampilkan tanda khusus
     if (nextBtn) {
         if (currentSlide === totalSlides - 1) {
             nextBtn.style.opacity = '0.3';
@@ -123,7 +123,6 @@ function updateSlideUI() {
         }
     }
     
-    // Sembunyikan navigasi di slide 0 (hero) — biar kelihatan bersih
     if (nav) {
         if (currentSlide === 0) {
             nav.classList.add('hidden');
@@ -132,7 +131,6 @@ function updateSlideUI() {
         }
     }
     
-    // Sembunyikan footer di slide selain 0
     if (footer) {
         if (currentSlide === 0) {
             footer.classList.remove('hidden');
@@ -153,7 +151,6 @@ function goToSlide(index) {
     currentSlide = index;
     updateSlideUI();
     
-    // Reset scroll di slide baru
     const activeSlide = document.querySelector('.slide.active');
     if (activeSlide) activeSlide.scrollTop = 0;
 }
@@ -172,11 +169,8 @@ function prevSlide() {
 
 // ⌨️ Keyboard navigation
 document.addEventListener('keydown', function(e) {
-    // Jangan aktif kalau password gate masih terbuka
     const gate = document.getElementById('passwordGate');
     if (gate && !gate.classList.contains('unlocked')) return;
-    
-    // Jangan aktif kalau user sedang ngetik di input
     if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
     
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
@@ -212,17 +206,18 @@ function handleSwipe() {
     const deltaX = touchEndX - touchStartX;
     const deltaY = touchEndY - touchStartY;
     
-    // Hanya trigger kalau swipe horizontal & cukup jauh
     if (Math.abs(deltaX) > 60 && Math.abs(deltaX) > Math.abs(deltaY)) {
         if (deltaX < 0) {
-            nextSlide(); // swipe ke kiri = next
+            nextSlide();
         } else {
-            prevSlide(); // swipe ke kanan = prev
+            prevSlide();
         }
     }
 }
 
-// 🌸 Falling Petals
+// ================================
+// 🌸 FALLING PETALS
+// ================================
 function createPetals() {
     const petals = ['🌸', '🌷', '🌺', '💮', '🌼'];
     const totalPetals = 10;
@@ -240,7 +235,9 @@ function createPetals() {
     }
 }
 
-// 🎯 Custom Heart Cursor
+// ================================
+// 🎯 CUSTOM HEART CURSOR
+// ================================
 function createHeartCursor() {
     if (window.innerWidth < 768) return;
     
@@ -262,7 +259,9 @@ function createHeartCursor() {
     });
 }
 
-// ✨ Typing Effect for Hero
+// ================================
+// ✨ TYPING EFFECT
+// ================================
 function typeWriter() {
     const text = "Untuk Kaia,\nSelamanya";
     const element = document.getElementById('heroTitle');
@@ -287,7 +286,56 @@ function typeWriter() {
     setTimeout(type, 500);
 }
 
-// 🚀 Inisialisasi semua efek saat halaman siap
+// ================================
+// 📸 DOWNLOAD SEMUA FOTO
+// ================================
+function downloadAllPhotos() {
+    const photos = [
+        { path: 'assets/foto1.jpg', name: 'Bukti-Judd-Sayang-Kaia.jpg' },
+        { path: 'assets/foto2.jpg', name: 'K-dan-J.jpg' },
+        { path: 'assets/foto3.jpg', name: 'Day-One-Becomes-US.jpg' },
+        { path: 'assets/foto4.jpg', name: 'Si-Cantik-Pemakan-Segala.jpg' },
+        { path: 'assets/foto5.jpg', name: 'Bocah-Minum-Apaan.jpg' },
+        { path: 'assets/foto6.jpg', name: 'Bidadari-Dari-Mana.jpg' }
+    ];
+    
+    const btn = document.querySelector('.download-all-btn');
+    const originalText = btn.textContent;
+    
+    btn.disabled = true;
+    btn.textContent = '⏳ Mengunduh...';
+    
+    let completed = 0;
+    
+    photos.forEach((photo, index) => {
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = photo.path;
+            link.download = photo.name;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            completed++;
+            btn.textContent = `⏳ ${completed}/${photos.length} foto...`;
+            
+            if (completed === photos.length) {
+                setTimeout(() => {
+                    btn.disabled = false;
+                    btn.textContent = '✅ Semua Terunduh!';
+                    
+                    setTimeout(() => {
+                        btn.textContent = originalText;
+                    }, 3000);
+                }, 500);
+            }
+        }, index * 500);
+    });
+}
+
+// ================================
+// 🚀 INIT ALL
+// ================================
 document.addEventListener('DOMContentLoaded', function() {
     createPetals();
     createHeartCursor();
@@ -295,7 +343,6 @@ document.addEventListener('DOMContentLoaded', function() {
     initSlideDots();
     updateSlideUI();
     
-    // Tahun otomatis di footer
     const yearEl = document.getElementById('year');
     if (yearEl) yearEl.textContent = new Date().getFullYear();
 });
