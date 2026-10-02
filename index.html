@@ -109,18 +109,79 @@
         </section>
 
         <!-- ============================ -->
-        <!-- SLIDE 3: GALERI -->
+        <!-- SLIDE 3: GALERI (dengan tombol download) -->
         <!-- ============================ -->
         <section class="slide" data-slide="3">
             <div class="slide-inner">
                 <h2>Our Moments 📸</h2>
+                <p class="desc">Klik tombol ⬇ untuk simpan foto</p>
                 <div class="gallery">
-                    <div class="polaroid"><img src="assets/foto1.jpg" alt="kenangan 1"><span>Bukti Judd sayang Kaia</span></div>
-                    <div class="polaroid"><img src="assets/foto2.jpg" alt="kenangan 2"><span>K & J</span></div>
-                    <div class="polaroid"><img src="assets/foto3.jpg" alt="kenangan 3"><span>Day one becomes "US"</span></div>
-                    <div class="polaroid"><img src="assets/foto4.jpg" alt="kenangan 4"><span>Si cantik pemakan segala</span></div>
-                    <div class="polaroid"><img src="assets/foto5.jpg" alt="kenangan 5"><span>Bocah minum apaan tuh?</span></div>
-                    <div class="polaroid"><img src="assets/foto6.jpg" alt="kenangan 6"><span>Bidadari dari manaa ini?</span></div>
+                    <div class="polaroid">
+                        <div class="polaroid-img-wrap">
+                            <img src="assets/foto1.jpg" alt="kenangan 1">
+                            <a href="assets/foto1.jpg" download="Bukti-Judd-Sayang-Kaia.jpg" class="download-btn" title="Download foto">
+                                <span>⬇</span>
+                            </a>
+                        </div>
+                        <span>Bukti Judd sayang Kaia</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <div class="polaroid-img-wrap">
+                            <img src="assets/foto2.jpg" alt="kenangan 2">
+                            <a href="assets/foto2.jpg" download="K-dan-J.jpg" class="download-btn" title="Download foto">
+                                <span>⬇</span>
+                            </a>
+                        </div>
+                        <span>K & J</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <div class="polaroid-img-wrap">
+                            <img src="assets/foto3.jpg" alt="kenangan 3">
+                            <a href="assets/foto3.jpg" download="Day-One-Becomes-US.jpg" class="download-btn" title="Download foto">
+                                <span>⬇</span>
+                            </a>
+                        </div>
+                        <span>Day one becomes "US"</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <div class="polaroid-img-wrap">
+                            <img src="assets/foto4.jpg" alt="kenangan 4">
+                            <a href="assets/foto4.jpg" download="Si-Cantik-Pemakan-Segala.jpg" class="download-btn" title="Download foto">
+                                <span>⬇</span>
+                            </a>
+                        </div>
+                        <span>Si cantik pemakan segala</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <div class="polaroid-img-wrap">
+                            <img src="assets/foto5.jpg" alt="kenangan 5">
+                            <a href="assets/foto5.jpg" download="Bocah-Minum-Apaan.jpg" class="download-btn" title="Download foto">
+                                <span>⬇</span>
+                            </a>
+                        </div>
+                        <span>Bocah minum apaan tuh?</span>
+                    </div>
+
+                    <div class="polaroid">
+                        <div class="polaroid-img-wrap">
+                            <img src="assets/foto6.jpg" alt="kenangan 6">
+                            <a href="assets/foto6.jpg" download="Bidadari-Dari-Mana.jpg" class="download-btn" title="Download foto">
+                                <span>⬇</span>
+                            </a>
+                        </div>
+                        <span>Bidadari dari manaa ini?</span>
+                    </div>
+                </div>
+
+                <!-- Tombol Download Semua Foto -->
+                <div class="download-all-wrap">
+                    <button class="download-all-btn" onclick="downloadAllPhotos()">
+                        ⬇ Download Semua Foto
+                    </button>
                 </div>
             </div>
         </section>
